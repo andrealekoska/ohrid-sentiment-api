@@ -1,0 +1,14 @@
+services:
+  sentiment-service:
+    build: ./sentiment-service
+    ports:
+      - "8000:8000"
+
+  api:
+    build: ./api
+    ports:
+      - "8080:8080"
+    environment:
+      SENTIMENT_SERVICE_URL: http://sentiment-service:8000
+    depends_on:
+      - sentiment-service
